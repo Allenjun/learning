@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.js"></script>
+<script>
+    let headers = {
+        login: 'mylogin',
+        passcode: 'mypasscode'
+    };
+    let client = Stomp.over(new SockJS('http://127.0.0.1:5997/stomp'));
+    client.connect(headers, function () {
+        alert("连接成功");
+        client.send("/app/chat", {}, JSON.stringify({"message": "我进来啦"}));
+        client.subscribe("/topic/message", function (event) {
+            console.info(event);
+        }, {})
+    });
+</script>
+</body>
+</html>

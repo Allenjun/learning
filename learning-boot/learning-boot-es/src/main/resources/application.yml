@@ -1,0 +1,5 @@
+spring:
+  data:
+    elasticsearch:
+      cluster-name: geektime
+      cluster-nodes: 192.168.30.150:9200

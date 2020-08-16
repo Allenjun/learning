@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS ali_user;
+
+CREATE TABLE ali_user (
+  id       BIGINT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(250) NOT NULL,
+  password VARCHAR(250) NOT NULL
+);

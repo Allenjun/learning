@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="datasource.properties"/>
+    <settings>
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+    </settings>
+    <typeAliases>
+        <package name="com.allen.learningbootmybatis.pojo.DO"/>
+    </typeAliases>
+    <typeHandlers>
+        <typeHandler handler="com.allen.learningbootmybatis.config.SexTypeHandler"/>
+    </typeHandlers>
+    <plugins>
+        <plugin interceptor="com.allen.learningbootmybatis.config.LogInterceptor"/>
+    </plugins>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <package name="com.allen.learningbootmybatis.mapper"/>
+    </mappers>
+
+</configuration>

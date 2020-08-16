@@ -1,0 +1,5 @@
+server:
+  port: 65653
+spring:
+  aop:
+    proxy-target-class: true

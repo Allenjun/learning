@@ -1,0 +1,41 @@
+spring:
+  kafka:
+    bootstrap-servers: 192.168.30.170:9092
+    producer:
+      # -1：等待所有的节点确认；0：不用确认；1：等待leader的确认
+      acks: -1
+      # 允许发送失败重试次数
+      retries: 3
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      # 批量发送大小(byte)
+      batch-size: 16384
+      # 延迟发送时间(ms)
+      properties:
+        linger:
+          ms: 5000
+        # 连接失败时，重新连接等待时间(ms)
+        reconnect:
+          backoff:
+            ms: 50
+      # 支持事务发送
+      transaction-id-prefix: demo
+      # 数据压缩类型
+      compression-type: gzip
+      # producer可以使用的最大内存缓存
+      buffer-memory: 33554432
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: earliest
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.allen.learningbootkafka.pojo
+        isolation:
+          level: read_committed
+      enable-auto-commit: true
+    listener:
+      type: single
+      ack-mode: batch

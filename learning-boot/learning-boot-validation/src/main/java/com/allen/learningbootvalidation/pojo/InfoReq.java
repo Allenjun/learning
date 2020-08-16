@@ -1,0 +1,35 @@
+package com.allen.learningbootvalidation.pojo;
+
+import com.allen.learningbootvalidation.validator.PhoneNumber;
+import lombok.Data;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+@Data
+public class InfoReq {
+
+    @PhoneNumber
+    private String phone;
+
+    @Min(value = 2, groups = {Idyes.class})
+    private Integer id;
+
+    @Valid
+    private Detail detail;
+
+    @Data
+    class Detail {
+        @NotNull
+        private String name;
+    }
+
+    public interface Idno {
+    }
+
+    public interface Idyes {
+    }
+
+
+}

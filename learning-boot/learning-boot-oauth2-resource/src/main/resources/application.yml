@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: learning-boot-oauth2-resource
+  security:
+    oauth2:
+      client:
+        provider:
+server:
+  port: 5998
