@@ -5,15 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 15:58
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatMessage {
-    
+
     private String message;
-    
 }

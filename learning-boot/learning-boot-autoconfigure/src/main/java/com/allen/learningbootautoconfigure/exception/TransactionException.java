@@ -2,8 +2,7 @@ package com.allen.learningbootautoconfigure.exception;
 
 /**
  * @author admin
- * @version 1.0.0
- * @Description TODO
+ * @version 1.0.0 @Description TODO
  * @createTime 2019/07/01 11:27:00
  */
 public class TransactionException extends DataSourceException {
@@ -23,5 +22,4 @@ public class TransactionException extends DataSourceException {
     public TransactionException(Throwable cause) {
         super(cause);
     }
-
 }

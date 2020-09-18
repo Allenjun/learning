@@ -1,12 +1,11 @@
 package com.allen.algorithm.tree;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 16:33
  */
 public class BinarySearchTree {
-    
+
     public static void main(String[] args) {
         BinaryTreeNode c1 = new BinaryTreeNode(null, null, 7);
         BinaryTreeNode b2 = new BinaryTreeNode(null, c1, 6);
@@ -19,17 +18,17 @@ public class BinarySearchTree {
         b1.setParent(a1);
         b2.setParent(a2);
         c1.setParent(b2);
-        
+
         BinarySearchTree searchTree = new BinarySearchTree();
         System.out.println(searchTree.search(root, 1));
-        
+
         searchTree.insert(root, 9);
         System.out.println(root.midOrder());
-        
+
         searchTree.delete(root, 3);
         System.out.println(root.midOrder());
     }
-    
+
     public BinaryTreeNode search(BinaryTreeNode node, int data) {
         if (node == null) {
             return null;
@@ -42,7 +41,7 @@ public class BinarySearchTree {
             return search(node.getLeft(), data);
         }
     }
-    
+
     public boolean insert(BinaryTreeNode node, int data) {
         if (node == null) {
             return false;
@@ -65,7 +64,7 @@ public class BinarySearchTree {
             }
         }
     }
-    
+
     public boolean delete(BinaryTreeNode node, int data) {
         BinaryTreeNode search = search(node, data);
         if (search == null) {
@@ -108,7 +107,7 @@ public class BinarySearchTree {
         }
         return false;
     }
-    
+
     public BinaryTreeNode max(BinaryTreeNode node) {
         if (node == null) {
             return null;
@@ -118,7 +117,7 @@ public class BinarySearchTree {
         }
         return node;
     }
-    
+
     public BinaryTreeNode min(BinaryTreeNode node) {
         if (node == null) {
             return null;

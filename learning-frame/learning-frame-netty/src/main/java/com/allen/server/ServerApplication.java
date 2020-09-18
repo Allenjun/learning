@@ -19,27 +19,40 @@ public class ServerApplication {
         this.port = port;
     }
 
+    public static void main(String[] args) {
+        try {
+            new ServerApplication(10008).start();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void start() throws InterruptedException {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workGroup = new NioEventLoopGroup();
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
-            serverBootstrap.group(bossGroup, workGroup).channel(NioServerSocketChannel.class).localAddress(port).childHandler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                protected void initChannel(SocketChannel socketChannel) throws Exception {
-                    socketChannel.pipeline().addLast(new HelloSocketChannel());
-                }
-            });
+            serverBootstrap
+                    .group(bossGroup, workGroup)
+                    .channel(NioServerSocketChannel.class)
+                    .localAddress(port)
+                    .childHandler(
+                            new ChannelInitializer<SocketChannel>() {
+                                @Override
+                                protected void initChannel(SocketChannel socketChannel) throws Exception {
+                                    socketChannel.pipeline().addLast(new HelloSocketChannel());
+                                }
+                            });
             ChannelFuture channelFuture = serverBootstrap.bind().sync();
             channelFuture.channel().closeFuture().sync();
         } finally {
             bossGroup.shutdownGracefully().sync();
             workGroup.shutdownGracefully().sync();
         }
-
     }
 
     public class HelloSocketChannel extends ChannelInboundHandlerAdapter {
+
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
             log.info("", msg);
@@ -57,14 +70,4 @@ public class ServerApplication {
             ctx.close();
         }
     }
-
-
-    public static void main(String[] args) {
-        try {
-            new ServerApplication(10008).start();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

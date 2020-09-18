@@ -1,4 +1,0 @@
-server:
-  port: 6995
-swagger:
-  base-package: com.allen.learningcloudservice.controller

@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
-
     <appender class="net.logstash.logback.appender.LogstashTcpSocketAppender" name="LOGSTASH">
         <destination>192.168.30.104:4560</destination>
         <!-- 日志输出编码 -->
         <encoder charset="UTF-8"
-            class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                 class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
-                <timestamp>
-                    <timeZone>UTC</timeZone>
-                </timestamp>
                 <pattern>
                     <pattern>
                         {
@@ -23,9 +18,14 @@
                         }
                     </pattern>
                 </pattern>
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
             </providers>
         </encoder>
     </appender>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
     <root level="INFO">
         <appender-ref ref="LOGSTASH"/>

@@ -8,25 +8,24 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 16:11
  */
 @Slf4j
 @Configuration
-//@MapperScan(basePackages = "com.allen.learningbootmybatis.mapper")
+// @MapperScan(basePackages = "com.allen.learningbootmybatis.mapper")
 public class MybatisConfiguration {
-    
+
     @Bean
     Interceptor logInterceptor() {
         return new LogInterceptor();
     }
-    
+
     @Bean
     Interceptor pageInterceptor() {
         return new PageInterceptor();
     }
-    
+
     @Bean
     TypeHandler sexTypeHandler() {
         return new SexTypeHandler();

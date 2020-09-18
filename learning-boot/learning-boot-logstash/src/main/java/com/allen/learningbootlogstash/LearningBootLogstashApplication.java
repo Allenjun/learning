@@ -11,15 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @SpringBootApplication
 public class LearningBootLogstashApplication {
-    
+
     public static void main(String[] args) {
         SpringApplication.run(LearningBootLogstashApplication.class, args);
     }
-    
+
     @GetMapping("/log/{msg}")
     public String log(@PathVariable String msg) {
         log.info(msg);
         return msg;
     }
-    
 }

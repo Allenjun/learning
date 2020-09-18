@@ -3,8 +3,7 @@ package com.allen.learningbootmybatis.pojo.DO;
 import lombok.Data;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 13:51
  */
 @Data

@@ -13,17 +13,29 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 11:38
  */
 @Slf4j
-@Intercepts({ @Signature(type = Executor.class, method = "query", args = { MappedStatement.class, Object.class,
-    RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class }),
-    @Signature(type = Executor.class, method = "query", args = { MappedStatement.class, Object.class,
-        RowBounds.class, ResultHandler.class }) })
+@Intercepts({
+        @Signature(
+                type = Executor.class,
+                method = "query",
+                args = {
+                        MappedStatement.class,
+                        Object.class,
+                        RowBounds.class,
+                        ResultHandler.class,
+                        CacheKey.class,
+                        BoundSql.class
+                }),
+        @Signature(
+                type = Executor.class,
+                method = "query",
+                args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class})
+})
 public class LogInterceptor implements Interceptor {
-    
+
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         log.info("mybatis拦截器：执行sql语句");

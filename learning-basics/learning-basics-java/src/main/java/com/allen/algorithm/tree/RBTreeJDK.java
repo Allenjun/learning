@@ -3,16 +3,15 @@ package com.allen.algorithm.tree;
 import java.util.Map;
 
 /**
- * @author JUN
- * @Description 用jdk1.8的TreeMap源码实现红黑树
+ * @author JUN @Description 用jdk1.8的TreeMap源码实现红黑树
  * @createTime 16:01
  */
 public class RBTreeJDK<K extends Comparable<K>, V> {
-    
+
     private static final boolean RED = false;
     private static final boolean BLACK = true;
     private Node<K, V> root;
-    
+
     public static void main(String[] args) {
         RBTreeJDK<Integer, Object> rbTreeJDK = new RBTreeJDK<>();
         rbTreeJDK.insert(7, 1);
@@ -25,11 +24,11 @@ public class RBTreeJDK<K extends Comparable<K>, V> {
         rbTreeJDK.insert(0, 8);
         rbTreeJDK.printTree();
         System.out.println(rbTreeJDK);
-        
+
         Object obj = rbTreeJDK.remove(6);
         System.out.println(obj);
     }
-    
+
     private V remove(K key) {
         Node<K, V> p = find(key);
         if (p == null) {
@@ -39,7 +38,7 @@ public class RBTreeJDK<K extends Comparable<K>, V> {
         remove(p);
         return oldValue;
     }
-    
+
     private void remove(Node<K, V> p) {
         if (p.left != null && p.right != null) {
             Node<K, V> s = successor(p);
@@ -78,7 +77,7 @@ public class RBTreeJDK<K extends Comparable<K>, V> {
             }
         }
     }
-    
+
     private void fixAfterDeletion(Node<K, V> x) {
         while (x != root && colorOf(x) == BLACK) {
             if (x == leftOf(parentOf(x))) {
@@ -138,7 +137,7 @@ public class RBTreeJDK<K extends Comparable<K>, V> {
         }
         setColor(x, BLACK);
     }
-    
+
     private Node<K, V> successor(Node<K, V> t) {
         if (t == null) {
             return null;
@@ -157,7 +156,7 @@ public class RBTreeJDK<K extends Comparable<K>, V> {
             return p;
         }
     }
-    
+
     private Node<K, V> find(K key) {
         Node<K, V> t = this.root;
         while (t != null && t.key.compareTo(key) != 0) {
@@ -165,11 +164,11 @@ public class RBTreeJDK<K extends Comparable<K>, V> {
         }
         return t;
     }
-    
+
     private void printTree() {
         printTree(root);
     }
-    
+
     private void printTree(Node<K, V> x) {
         if (x != null) {
             System.out.print(x.color == RED ? "RED " : "BLACK ");
@@ -181,7 +180,7 @@ public class RBTreeJDK<K extends Comparable<K>, V> {
             printTree(x.right);
         }
     }
-    
+
     public V insert(K key, V value) {
         Node<K, V> t = root;
         // root是否为空
@@ -212,7 +211,7 @@ public class RBTreeJDK<K extends Comparable<K>, V> {
         fixAfterInsertion(e);
         return null;
     }
-    
+
     private void fixAfterInsertion(Node<K, V> x) {
         // x为红节点
         setColor(x, RED);
@@ -253,17 +252,17 @@ public class RBTreeJDK<K extends Comparable<K>, V> {
         }
         setColor(root, BLACK);
     }
-    
+
     private boolean colorOf(Node<K, V> x) {
         return x == null ? BLACK : x.color;
     }
-    
+
     private void setColor(Node<K, V> x, boolean color) {
         if (x != null) {
             x.color = color;
         }
     }
-    
+
     private void rotateLeft(Node<K, V> p) {
         if (p != null) {
             Node<K, V> r = p.right;
@@ -285,7 +284,7 @@ public class RBTreeJDK<K extends Comparable<K>, V> {
             p.parent = r;
         }
     }
-    
+
     private void rotateRight(Node<K, V> p) {
         if (p != null) {
             Node<K, V> l = p.left;
@@ -307,44 +306,44 @@ public class RBTreeJDK<K extends Comparable<K>, V> {
             p.parent = l;
         }
     }
-    
+
     private Node<K, V> rightOf(Node<K, V> x) {
         return x == null ? null : x.right;
     }
-    
+
     private Node<K, V> leftOf(Node<K, V> x) {
         return x == null ? null : x.left;
     }
-    
+
     private Node<K, V> parentOf(Node<K, V> x) {
         return x == null ? null : x.parent;
     }
-    
+
     class Node<K, V> implements Map.Entry<K, V> {
-        
+
         K key;
         V value;
         Node<K, V> left;
         Node<K, V> right;
         Node<K, V> parent;
         boolean color = BLACK;
-        
+
         public Node(K key, V value, Node<K, V> parent) {
             this.key = key;
             this.value = value;
             this.parent = parent;
         }
-        
+
         @Override
         public K getKey() {
             return key;
         }
-        
+
         @Override
         public V getValue() {
             return value;
         }
-        
+
         @Override
         public V setValue(V value) {
             V oldValue = this.value;
@@ -352,5 +351,4 @@ public class RBTreeJDK<K extends Comparable<K>, V> {
             return oldValue;
         }
     }
-    
 }

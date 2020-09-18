@@ -7,28 +7,36 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.BaseRowModel;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.val;
 import org.apache.commons.compress.utils.Lists;
 import org.junit.Test;
 
-/** Unit test for simple App. */
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.List;
+
+/**
+ * Unit test for simple App.
+ */
 public class AppTest {
 
-    /** Rigorous Test :-) */
+    /**
+     * Rigorous Test :-)
+     */
     @Test
     public void shouldAnswerWithTrue() {
         val file = new File("D:/1.xlsx");
         ExcelListener excelListener = new ExcelListener();
         try {
             val excelReader =
-                new ExcelReader(new BufferedInputStream(new FileInputStream(file)), ExcelTypeEnum.XLSX, excelListener);
+                    new ExcelReader(
+                            new BufferedInputStream(new FileInputStream(file)),
+                            ExcelTypeEnum.XLSX,
+                            excelListener);
             excelReader.read(new Sheet(1, 1, Person.class));
             List<Person> data = excelListener.getData();
             System.out.println(data);
@@ -43,6 +51,7 @@ public class AppTest {
 
         @ExcelProperty(value = "姓名", index = 1)
         private String name;
+
         @ExcelProperty(value = "年龄", index = 2)
         private String age;
     }
@@ -58,7 +67,6 @@ public class AppTest {
 
         @Override
         public void doAfterAllAnalysed(AnalysisContext analysisContext) {
-
         }
 
         public List<Person> getData() {

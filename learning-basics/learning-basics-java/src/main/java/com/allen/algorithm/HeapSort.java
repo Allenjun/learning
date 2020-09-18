@@ -3,21 +3,18 @@ package com.allen.algorithm;
 import java.util.Arrays;
 
 /**
- * @author JUN
- * @Description 堆排序
- *              思想：进
- *              算法复杂度为：
+ * @author JUN @Description 堆排序 思想：进 算法复杂度为：
  * @createTime 11:16
  */
 public class HeapSort extends Sort {
-    
+
     public static void main(String[] args) {
-        int[] nums = { 9, 5, 2, 7, 4, 9, 8, 2, 8 };
-//        int[] nums = { 9 };
+        int[] nums = {9, 5, 2, 7, 4, 9, 8, 2, 8};
+        //        int[] nums = { 9 };
         new HeapSort().sort(nums);
         System.out.println(Arrays.toString(nums));
     }
-    
+
     @Override
     public void sort(int[] nums) {
         // 构造最大堆
@@ -30,7 +27,7 @@ public class HeapSort extends Sort {
             percolateDown(nums, 0, i);
         }
     }
-    
+
     private void percolateDown(int[] nums, int i, int length) {
         int tmp = nums[i];
         for (int child = i * 2 + 1; child < length; i = child, child = i * 2 + 1) {
@@ -45,5 +42,4 @@ public class HeapSort extends Sort {
         }
         nums[i] = tmp;
     }
-    
 }

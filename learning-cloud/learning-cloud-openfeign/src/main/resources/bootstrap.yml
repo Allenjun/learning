@@ -1,0 +1,15 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: learning-cloud-openfeign
+  cloud:
+    consul:
+      discovery:
+        prefer-ip-address: true
+logging:
+  level:
+    root: info
+feign:
+  hystrix:
+    enabled: true

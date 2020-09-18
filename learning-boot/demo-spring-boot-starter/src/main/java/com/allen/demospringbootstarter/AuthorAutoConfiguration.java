@@ -8,8 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 17:13
  */
 @Configuration
@@ -17,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnProperty(prefix = "author", value = "enabled", havingValue = "true")
 @EnableConfigurationProperties(AuthorProperties.class)
 public class AuthorAutoConfiguration {
-    
+
     @Bean
     @ConditionalOnMissingBean(Author.class)
     public Author author(AuthorProperties authorProperties) {
@@ -25,5 +24,4 @@ public class AuthorAutoConfiguration {
         defaultAuthor.setAuthorProperties(authorProperties);
         return defaultAuthor;
     }
-    
 }

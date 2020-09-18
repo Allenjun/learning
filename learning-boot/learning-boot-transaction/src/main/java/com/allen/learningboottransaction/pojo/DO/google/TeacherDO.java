@@ -1,18 +1,11 @@
 package com.allen.learningboottransaction.pojo.DO.google;
 
+import javax.persistence.*;
 import java.util.Objects;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * @author admin
- * @version 1.0.0
- * @Description TODO
+ * @version 1.0.0 @Description TODO
  * @createTime 2019/07/17 16:44:00
  */
 @Entity
@@ -57,7 +50,6 @@ public class TeacherDO {
             return false;
         }
         TeacherDO teacherDO = (TeacherDO) o;
-        return id == teacherDO.id &&
-            Objects.equals(name, teacherDO.name);
+        return id == teacherDO.id && Objects.equals(name, teacherDO.name);
     }
 }

@@ -12,5 +12,4 @@ public class LearningBootBatchApplicationTests {
     @Test
     public void contextLoads() {
     }
-
 }

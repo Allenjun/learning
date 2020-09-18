@@ -1,16 +1,19 @@
+server:
+  port: 8080
 spring:
   application:
     name: learning-cloud-service
   cloud:
     consul:
+      config:
+        format: yaml
       discovery:
-        hostname: 192.168.30.1
-      host: 192.168.30.160
+        prefer-ip-address: true
+      host: 127.0.0.1
       port: 8500
-    config:
-      profile: default
-      label: master
-      #      uri: http://127.0.0.1:6997/
-      discovery:
-        service-id: learning-cloud-config-server
-        enabled: true
+  servlet:
+    multipart:
+      max-file-size: 30MB
+author: xxx
+
+

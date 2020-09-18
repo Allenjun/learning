@@ -15,12 +15,15 @@ public class MultiReq {
 
     @NotBlank(groups = MultiReqByLike.class)
     private String name;
+
     @NotBlank(groups = MultiReqByLike.class)
     private String sex;
 
     public interface MultiReqById {
+
     }
 
     public interface MultiReqByLike {
+
     }
 }

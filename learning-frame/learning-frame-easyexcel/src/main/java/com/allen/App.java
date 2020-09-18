@@ -2,7 +2,6 @@ package com.allen;
 
 /**
  * Hello world!
- *
  */
 public class App {
 

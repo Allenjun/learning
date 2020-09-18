@@ -11,18 +11,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LearningBootAspectjApplicationTests {
-    
+
     @Autowired
     HelloService helloService;
-    
+
     @Autowired
     ApplicationContext applicationContext;
-    
+
     @Test
     public void test1() {
         helloService.hello();
     }
-    
+
     @Test
     public void test2() {
         HelloService bean = applicationContext.getBean(helloService.getClass());
@@ -30,5 +30,4 @@ public class LearningBootAspectjApplicationTests {
         System.out.println(applicationContext);
         System.out.println(bean);
     }
-    
 }

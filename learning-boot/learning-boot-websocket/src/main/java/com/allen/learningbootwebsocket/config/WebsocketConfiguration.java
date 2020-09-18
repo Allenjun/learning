@@ -8,26 +8,26 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 13:16
  */
-//@Configuration
+// @Configuration
 @EnableWebSocket
 public class WebsocketConfiguration implements WebSocketConfigurer {
-    
+
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(myWebSocketHandler(), "myWebSocket")
-            .addInterceptors(myHandshakeInterceptor())
-            .withSockJS();
+        registry
+                .addHandler(myWebSocketHandler(), "myWebSocket")
+                .addInterceptors(myHandshakeInterceptor())
+                .withSockJS();
     }
-    
+
     @Bean
     public WebSocketHandler myWebSocketHandler() {
         return new MyWebSocketHandler();
     }
-    
+
     @Bean
     public HandshakeInterceptor myHandshakeInterceptor() {
         return new MyHandshakeInterceptor();

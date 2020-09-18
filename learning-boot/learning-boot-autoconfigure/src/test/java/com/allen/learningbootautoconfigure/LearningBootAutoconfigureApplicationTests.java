@@ -12,5 +12,4 @@ public class LearningBootAutoconfigureApplicationTests {
     @Test
     public void contextLoads() {
     }
-
 }

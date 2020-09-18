@@ -9,5 +9,4 @@ class LearningBootWarApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

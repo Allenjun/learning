@@ -1,28 +1,22 @@
 package com.allen.algorithm.leetcode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 11:23
  */
 public class StackQuestion {
-    
+
     public static void main(String[] args) {
         StackQuestion stackQuestion = new StackQuestion();
         System.out.println(stackQuestion.simplifyPath("/a//b////c/d//././/.."));
     }
-    
+
     public String reverseParentheses(String s) {
         return null;
     }
-    
+
     public String removeDuplicates(String s, int k) {
         Stack<int[]> stack = new Stack<>();
         for (int i = s.length() - 1; i >= 0; i--) {
@@ -33,7 +27,7 @@ public class StackQuestion {
                     stack.pop();
                 }
             } else {
-                stack.push(new int[]{ ch, 1 });
+                stack.push(new int[]{ch, 1});
             }
         }
         StringBuffer sb = new StringBuffer();
@@ -45,7 +39,7 @@ public class StackQuestion {
         }
         return sb.toString();
     }
-    
+
     public int[] nextGreaterElements(int[] nums) {
         int[] result = new int[nums.length];
         Stack<Integer> stack = new Stack<>();
@@ -58,7 +52,7 @@ public class StackQuestion {
         }
         return result;
     }
-    
+
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         Map<Integer, Integer> map = new HashMap<>();
         Stack<Integer> stack = new Stack<>();
@@ -75,7 +69,7 @@ public class StackQuestion {
         }
         return result;
     }
-    
+
     public int evalRPN(String[] tokens) {
         Stack<Integer> stack = new Stack<>();
         for (String token : tokens) {
@@ -100,7 +94,7 @@ public class StackQuestion {
         }
         return stack.pop();
     }
-    
+
     public boolean validateStackSequences(int[] pushed, int[] popped) {
         Stack<Integer> stack = new Stack<>();
         int j = 0;
@@ -113,7 +107,7 @@ public class StackQuestion {
         }
         return pushed.length == j;
     }
-    
+
     public int minAddToMakeValid(String s) {
         int num = 0;
         Stack<String> stack = new Stack<>();
@@ -131,7 +125,7 @@ public class StackQuestion {
         }
         return stack.size() + num;
     }
-    
+
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
@@ -148,13 +142,14 @@ public class StackQuestion {
         }
         return list;
     }
-    
+
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> list = new LinkedList<>();
         return zigzagLevelOrder(list, 0, root);
     }
-    
-    private List<List<Integer>> zigzagLevelOrder(List<List<Integer>> list, int zoom, TreeNode node) {
+
+    private List<List<Integer>> zigzagLevelOrder(List<List<Integer>> list, int zoom,
+                                                 TreeNode node) {
         if (node != null) {
             for (int i = list.size() - 1; i < zoom; i++) {
                 list.add(new LinkedList<>());
@@ -169,12 +164,12 @@ public class StackQuestion {
         }
         return list;
     }
-    
+
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         return inorderTraversal(list, root);
     }
-    
+
     private List<Integer> inorderTraversal(List<Integer> list, TreeNode node) {
         if (node != null) {
             inorderTraversal(list, node.left);
@@ -183,7 +178,7 @@ public class StackQuestion {
         }
         return list;
     }
-    
+
     public String simplifyPath(String path) {
         Stack<String> stack = new Stack<>();
         String[] strArr = path.split("/");
@@ -196,13 +191,13 @@ public class StackQuestion {
         }
         return "/" + String.join("/", stack);
     }
-    
+
     class TreeNode {
-        
+
         int val;
         TreeNode left;
         TreeNode right;
-        
+
         TreeNode(int x) {
             val = x;
         }

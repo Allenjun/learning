@@ -7,28 +7,23 @@ import com.allen.learningbootsecurity.pojo.DO.SysMenu;
 import com.allen.learningbootsecurity.pojo.DO.SysRole;
 import com.allen.learningbootsecurity.pojo.DO.SysUser;
 import com.allen.learningbootsecurity.utils.RedisLockHelper;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.BoundListOperations;
-import org.springframework.data.redis.core.Cursor;
-import org.springframework.data.redis.core.RedisCallback;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ScanOptions;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LearningBootSecurityApplicationTests {
-    
+
     @Autowired
     SysUserMapper sysUserMapper;
     @Autowired
@@ -39,26 +34,28 @@ public class LearningBootSecurityApplicationTests {
     RedisTemplate redisTemplate;
     @Autowired
     StringRedisTemplate stringRedisTemplate;
-    
+
     @Test
     public void test1() {
         Optional<SysUser> optionalSysUser = sysUserMapper.findByUserName("root");
         if (optionalSysUser.isPresent()) {
             System.out.println(optionalSysUser.get());
-            List<SysRole> sysRoles = sysRoleMapper.selectByUserId(optionalSysUser.get().getUserId());
-            sysRoles.forEach(sysRole -> {
-                List<SysMenu> sysMenus = sysMenuMapper.selectByRoleId(sysRole.getRoleId());
-                System.out.println(sysMenus);
-            });
+            List<SysRole> sysRoles = sysRoleMapper
+                    .selectByUserId(optionalSysUser.get().getUserId());
+            sysRoles.forEach(
+                    sysRole -> {
+                        List<SysMenu> sysMenus = sysMenuMapper.selectByRoleId(sysRole.getRoleId());
+                        System.out.println(sysMenus);
+                    });
         }
     }
-    
+
     @Test
     public void test2() {
         String encode = new BCryptPasswordEncoder().encode("test");
         System.out.println(encode);
     }
-    
+
     @Test
     public void test3() {
         BoundListOperations phones = redisTemplate.boundListOps("phones");
@@ -66,7 +63,7 @@ public class LearningBootSecurityApplicationTests {
         System.out.println(phones.leftPush("huawei"));
         System.out.println(phones.leftPush("xiaomi"));
     }
-    
+
     @Test
     public void test4() {
         BoundListOperations phones = redisTemplate.boundListOps("phones");
@@ -75,18 +72,17 @@ public class LearningBootSecurityApplicationTests {
             System.out.println(phones.rightPop(5, TimeUnit.SECONDS));
         }
     }
-    
+
     @Test
     public void test6() {
         String key = "/index";
         redisTemplate.opsForValue().setBit(key, 0, true);
         System.out.println(redisTemplate.opsForValue().getBit(key, 0));
         byte[] bytes = redisTemplate.getKeySerializer().serialize(key);
-        System.out
-            .println(
+        System.out.println(
                 redisTemplate.execute((RedisCallback<Long>) connection -> connection.bitCount(bytes)));
     }
-    
+
     @Test
     public void test7() {
         String key = "book";
@@ -103,26 +99,26 @@ public class LearningBootSecurityApplicationTests {
             System.out.println(((TypedTuple) scan.next()).getValue());
         }
     }
-    
+
     @Test
     public void test5() throws InterruptedException {
         class Product {
-            
+
             int store;
-            
+
             public void produce() {
                 store++;
             }
-            
+
             public void consume() {
                 store--;
             }
-            
+
             public int getStore() {
                 return store;
             }
         }
-        
+
         Product product = new Product();
         for (int i = 0; i < 50; i++) {
             new Thread() {
@@ -142,5 +138,4 @@ public class LearningBootSecurityApplicationTests {
         Thread.sleep(15000);
         System.out.println(product.getStore());
     }
-    
 }

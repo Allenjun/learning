@@ -15,5 +15,4 @@ public class LearningBootLogstashApplicationTests {
     public void contextLoads() {
         log.info("实施一些日子");
     }
-
 }

@@ -16,18 +16,27 @@ public class ClientApplication {
         this.port = port;
     }
 
+    public static void main(String[] args) {
+        try {
+            new ClientApplication(10008).start();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void start() throws InterruptedException {
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();
             b.group(group)
                     .channel(NioSocketChannel.class)
-                    .handler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        protected void initChannel(SocketChannel socketChannel) throws Exception {
-                            socketChannel.pipeline().addLast(new ClientSocketChannel());
-                        }
-                    });
+                    .handler(
+                            new ChannelInitializer<SocketChannel>() {
+                                @Override
+                                protected void initChannel(SocketChannel socketChannel) throws Exception {
+                                    socketChannel.pipeline().addLast(new ClientSocketChannel());
+                                }
+                            });
             ChannelFuture sync = b.connect("127.0.0.1", port).sync();
             sync.channel().closeFuture().sync();
 
@@ -60,13 +69,4 @@ public class ClientApplication {
             ctx.flush();
         }
     }
-
-    public static void main(String[] args) {
-        try {
-            new ClientApplication(10008).start();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

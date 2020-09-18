@@ -9,22 +9,21 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 15:53
  */
 @Slf4j
 @Controller
 public class MessageController {
-    
+
     @Autowired
     SimpMessagingTemplate simpMessagingTemplate;
-    
+
     @MessageMapping("/hi")
     public void hi(ChatMessage message) {
         simpMessagingTemplate.convertAndSendToUser("allen", "/topic/hi", message);
     }
-    
+
     @MessageMapping("/chat")
     @SendTo("/topic/message")
     public ChatMessage oneMessageToAll(ChatMessage message) {

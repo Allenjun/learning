@@ -6,8 +6,7 @@ import com.allen.learningboottransaction.pojo.DO.google.TeacherDO;
 
 /**
  * @author admin
- * @version 1.0.0
- * @Description TODO
+ * @version 1.0.0 @Description TODO
  * @createTime 2019/07/17 11:50:00
  */
 public interface IndexService {
@@ -36,5 +35,4 @@ public interface IndexService {
      * @description: 分布式事务
      */
     void doInDistributedTransaction(BookDO bookDO, TeacherDO teacherDO);
-
 }

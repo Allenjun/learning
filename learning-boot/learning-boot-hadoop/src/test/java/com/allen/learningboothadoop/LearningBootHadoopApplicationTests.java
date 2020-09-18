@@ -12,5 +12,4 @@ public class LearningBootHadoopApplicationTests {
     @Test
     public void contextLoads() {
     }
-
 }

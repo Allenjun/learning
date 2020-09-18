@@ -8,16 +8,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 14:26
  */
 @Component
 public class MyUserDetailService implements UserDetailsService {
-    
+
     @Autowired
     private RBACService rbacService;
-    
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         UserDetails userDetails = rbacService.loadUserByUsername(s);

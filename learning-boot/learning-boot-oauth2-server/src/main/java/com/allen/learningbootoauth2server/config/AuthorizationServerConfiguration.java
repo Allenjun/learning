@@ -16,53 +16,55 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 13:02
  */
 @EnableAuthorizationServer
 @Configuration
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
-    
+
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     UserDetailsService userDetailsService;
-    
+
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.allowFormAuthenticationForClients()
-            .checkTokenAccess("permitAll()")  // check_token
-            .tokenKeyAccess("isAuthenticated()");   // refresh_token
+        security
+                .allowFormAuthenticationForClients()
+                .checkTokenAccess("permitAll()") // check_token
+                .tokenKeyAccess("isAuthenticated()"); // refresh_token
     }
-    
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         // 注册一个基于内存的客户端备案
-        clients.inMemory()
-            .withClient("wechat")
-            .resourceIds("wechat")
-            .secret(bCryptPasswordEncoder.encode("mysecret"))
-            .scopes("all")
-            .authorizedGrantTypes("authorization_code", "refresh_token")
-            .authorities("ROLE_NORMAL");
+        clients
+                .inMemory()
+                .withClient("wechat")
+                .resourceIds("wechat")
+                .secret(bCryptPasswordEncoder.encode("mysecret"))
+                .scopes("all")
+                .authorizedGrantTypes("authorization_code", "refresh_token")
+                .authorities("ROLE_NORMAL");
     }
-    
+
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.authenticationManager(authenticationManager)
-            .userDetailsService(userDetailsService)
-            .tokenStore(jwtTokenStore())
-            .accessTokenConverter(jwtAccessTokenConverter());
+        endpoints
+                .authenticationManager(authenticationManager)
+                .userDetailsService(userDetailsService)
+                .tokenStore(jwtTokenStore())
+                .accessTokenConverter(jwtAccessTokenConverter());
     }
-    
+
     @Bean
     public TokenStore jwtTokenStore() {
         return new JwtTokenStore(jwtAccessTokenConverter());
     }
-    
+
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();

@@ -1,18 +1,11 @@
 package com.allen.learningboottransaction.pojo.DO.facebook;
 
+import javax.persistence.*;
 import java.util.Objects;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * @author admin
- * @version 1.0.0
- * @Description TODO
+ * @version 1.0.0 @Description TODO
  * @createTime 2019/07/17 11:46:00
  */
 @Entity
@@ -68,8 +61,8 @@ public class BookDO {
             return false;
         }
         BookDO bookDO = (BookDO) o;
-        return id == bookDO.id &&
-            Objects.equals(description, bookDO.description) &&
-            Objects.equals(title, bookDO.title);
+        return id == bookDO.id
+                && Objects.equals(description, bookDO.description)
+                && Objects.equals(title, bookDO.title);
     }
 }

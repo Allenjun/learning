@@ -15,13 +15,13 @@ public class IndexController {
     public String handler(ConstraintViolationException ex) {
         return ex.getMessage();
     }
-/*
+  /*
 
-    @GetMapping("/phone")
-    public String phone(@Validated @PhoneNumber String phone) {
-        return "your phone is: " + phone;
-    }
-*/
+      @GetMapping("/phone")
+      public String phone(@Validated @PhoneNumber String phone) {
+          return "your phone is: " + phone;
+      }
+  */
 
     @PostMapping("/hello")
     public InfoReq hello(@Validated(InfoReq.Idyes.class) @RequestBody InfoReq infoReq) {

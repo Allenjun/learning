@@ -12,5 +12,4 @@ public class LearningBootRocketmqApplicationTests {
     @Test
     public void contextLoads() {
     }
-
 }

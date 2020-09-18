@@ -6,8 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author admin
- * @version 1.0.0
- * @Description TODO
+ * @version 1.0.0 @Description TODO
  * @createTime 2019/06/24 17:07:00
  */
 @Configuration

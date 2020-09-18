@@ -1,44 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <artifactId>learning-frame</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+
+    <modules>
+
+    </modules>
+    <name>learning-frame</name>
+
+    <packaging>pom</packaging>
+    <!-- FIXME change it to the project's website -->
     <parent>
         <artifactId>learning</artifactId>
         <groupId>com.allen</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>learning-frame</artifactId>
-    <packaging>pom</packaging>
-
-    <name>learning-frame</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
-    <modules>
-
-
-
-    </modules>
-
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <url>http://www.example.com</url>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
-        </dependency>
-
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
-        </dependency>
-    </dependencies>
 </project>

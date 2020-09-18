@@ -1,11 +1,13 @@
 package com.allen.learningbootsecurity.pojo.DO;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * sys_role
+ *
  * @author
  */
 @Data

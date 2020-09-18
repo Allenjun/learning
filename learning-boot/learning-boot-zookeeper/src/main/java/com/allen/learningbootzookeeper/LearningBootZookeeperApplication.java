@@ -5,9 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class LearningBootZookeeperApplication {
-    
+
     public static void main(String[] args) {
         SpringApplication.run(LearningBootZookeeperApplication.class, args);
     }
-    
 }

@@ -14,12 +14,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author admin
- * @version 1.0.0
- * @Description TODO
+ * @version 1.0.0 @Description TODO
  * @createTime 2019/07/15 14:27:00
  */
 @Configuration
-@Import({ Swagger2Properties.class })
+@Import({Swagger2Properties.class})
 @EnableSwagger2
 public class Swagger2AutoConfiguration {
 
@@ -29,18 +28,17 @@ public class Swagger2AutoConfiguration {
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-            .apiInfo(apiInfo())
-            .select()
-            .apis(RequestHandlerSelectors.basePackage(swagger2Properties.getBasePackage()))
-            .paths(PathSelectors.any())
-            .build();
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage(swagger2Properties.getBasePackage()))
+                .paths(PathSelectors.any())
+                .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title(swagger2Properties.getTitle())
-            .version(swagger2Properties.getVersion())
-            .build();
+                .title(swagger2Properties.getTitle())
+                .version(swagger2Properties.getVersion())
+                .build();
     }
-
 }

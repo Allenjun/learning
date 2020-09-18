@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <artifactId>learning-frame-selenium</artifactId>
+
+    <dependencies>
+        <dependency>
+            <artifactId>selenium-java</artifactId>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <artifactId>junit</artifactId>
+            <groupId>junit</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>lombok</artifactId>
+            <groupId>org.projectlombok</groupId>
+        </dependency>
+    </dependencies>
     <modelVersion>4.0.0</modelVersion>
+    <name>learning-frame-selenium</name>
 
     <parent>
         <artifactId>learning-frame</artifactId>
         <groupId>com.allen</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>learning-frame-selenium</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
-    <name>learning-frame-selenium</name>
     <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
-        </dependency>
-    </dependencies>
+    <url>http://www.example.com</url>
+
+    <version>1.0-SNAPSHOT</version>
 
 </project>

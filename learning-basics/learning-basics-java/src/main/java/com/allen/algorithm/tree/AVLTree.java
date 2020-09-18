@@ -1,12 +1,11 @@
 package com.allen.algorithm.tree;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 16:13
  */
 public class AVLTree extends BinarySearchTree {
-    
+
     public static void main(String[] args) {
         // 3,2,1,4,5,6,7,16,15,14,13,12,11,10,8,9
         AVLTree avlTree = new AVLTree();
@@ -28,12 +27,12 @@ public class AVLTree extends BinarySearchTree {
         root = avlTree.avlInsert(root, 9);
         System.out.println(root.preOrder());
         System.out.println(root.midOrder());
-        
+
         avlTree.avlDelete(root, 13);
         System.out.println(root.preOrder());
         System.out.println(root.midOrder());
     }
-    
+
     public BinaryTreeNode avlInsert(BinaryTreeNode node, int data) {
         if (node == null) {
             return new BinaryTreeNode(data);
@@ -63,12 +62,12 @@ public class AVLTree extends BinarySearchTree {
         node.setHeight(Math.max(height(node.getLeft()), height(node.getRight())) + 1);
         return node;
     }
-    
+
     private BinaryTreeNode leftRightRotaion(BinaryTreeNode node) {
         node.setLeft(rightRightRotation(node.getLeft()));
         return leftLeftRotation(node);
     }
-    
+
     private BinaryTreeNode leftLeftRotation(BinaryTreeNode node) {
         BinaryTreeNode left = node.getLeft();
         node.setLeft(left.getRight());
@@ -77,11 +76,11 @@ public class AVLTree extends BinarySearchTree {
         node.setHeight(Math.max(height(node.getLeft()), height(node.getRight())) + 1);
         return left;
     }
-    
+
     private int height(BinaryTreeNode node) {
         return node == null ? 0 : node.getHeight();
     }
-    
+
     private BinaryTreeNode rightRightRotation(BinaryTreeNode node) {
         BinaryTreeNode right = node.getRight();
         node.setRight(right.getLeft());
@@ -90,12 +89,12 @@ public class AVLTree extends BinarySearchTree {
         node.setHeight(Math.max(height(node.getLeft()), height(node.getRight())) + 1);
         return right;
     }
-    
+
     private BinaryTreeNode rightLeftRotation(BinaryTreeNode node) {
         node.setRight(leftLeftRotation(node.getRight()));
         return rightRightRotation(node);
     }
-    
+
     public BinaryTreeNode avlDelete(BinaryTreeNode node, int data) {
         if (node == null) {
             return null;
@@ -129,5 +128,4 @@ public class AVLTree extends BinarySearchTree {
         }
         return node;
     }
-    
 }

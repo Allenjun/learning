@@ -8,8 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * @author admin
- * @version 1.0.0
- * @Description TODO
+ * @version 1.0.0 @Description TODO
  * @createTime 2019/07/15 15:41:00
  */
 @Configuration
@@ -21,5 +20,4 @@ public class CustomWebAutoConfiguration {
     public HandlerInterceptor requestInterceptor() {
         return new LogInterceptor();
     }
-
 }

@@ -1,7 +1,6 @@
 package com.allen.learningboottransaction.config;
 
 import com.zaxxer.hikari.HikariDataSource;
-import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -14,17 +13,18 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import javax.sql.DataSource;
+
 /**
  * @author admin
- * @version 1.0.0
- * @Description TODO
+ * @version 1.0.0 @Description TODO
  * @createTime 2019/07/17 15:13:00
  */
 @Configuration
-@EnableJpaRepositories(basePackages = {
-    "com.allen.learningboottransaction.repository.google" },
-    entityManagerFactoryRef = "entityManagerFactoryGoogle",
-    transactionManagerRef = "platformTransactionManagerGoogle")
+@EnableJpaRepositories(
+        basePackages = {"com.allen.learningboottransaction.repository.google"},
+        entityManagerFactoryRef = "entityManagerFactoryGoogle",
+        transactionManagerRef = "platformTransactionManagerGoogle")
 public class DataSourceGoogleConfig {
 
     @Autowired
@@ -37,25 +37,27 @@ public class DataSourceGoogleConfig {
     }
 
     @Bean
-    public TransactionTemplate transactionTemplateGoogle(EntityManagerFactoryBuilder entityManagerFactoryBuilder) {
-        return new TransactionTemplate(platformTransactionManagerGoogle(entityManagerFactoryBuilder));
+    public TransactionTemplate transactionTemplateGoogle(
+            EntityManagerFactoryBuilder entityManagerFactoryBuilder) {
+        return new TransactionTemplate(
+                platformTransactionManagerGoogle(entityManagerFactoryBuilder));
     }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryGoogle(
-        EntityManagerFactoryBuilder entityManagerFactoryBuilder) {
+            EntityManagerFactoryBuilder entityManagerFactoryBuilder) {
         return entityManagerFactoryBuilder
-            .dataSource(dataSourceGoogle())
-            .packages("com.allen.learningboottransaction.pojo.DO.google")
-            .properties(jpaProperties.getProperties())
-            .persistenceUnit("google")
-            .build();
+                .dataSource(dataSourceGoogle())
+                .packages("com.allen.learningboottransaction.pojo.DO.google")
+                .properties(jpaProperties.getProperties())
+                .persistenceUnit("google")
+                .build();
     }
 
     @Bean
     public PlatformTransactionManager platformTransactionManagerGoogle(
-        EntityManagerFactoryBuilder entityManagerFactoryBuilder) {
-        return new JpaTransactionManager(entityManagerFactoryGoogle(entityManagerFactoryBuilder).getObject());
+            EntityManagerFactoryBuilder entityManagerFactoryBuilder) {
+        return new JpaTransactionManager(
+                entityManagerFactoryGoogle(entityManagerFactoryBuilder).getObject());
     }
-
 }

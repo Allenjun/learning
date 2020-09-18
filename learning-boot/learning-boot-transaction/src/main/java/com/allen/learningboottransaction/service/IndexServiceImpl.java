@@ -18,8 +18,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 /**
  * @author admin
- * @version 1.0.0
- * @Description TODO
+ * @version 1.0.0 @Description TODO
  * @createTime 2019/07/17 11:52:00
  */
 @Service
@@ -33,6 +32,7 @@ public class IndexServiceImpl implements IndexService {
     TeacherRepository teacherRepository;
     @Autowired
     PlatformTransactionManager platformTransactionManager;
+
     @Autowired
     @Qualifier("transactionTemplateGoogle")
     TransactionTemplate transactionTemplateGoogle;
@@ -53,7 +53,8 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public void doInCodeTransaction(BookDO bookDO, UserDO userDO) {
         DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
-        TransactionStatus transactionStatus = platformTransactionManager.getTransaction(transactionDefinition);
+        TransactionStatus transactionStatus =
+                platformTransactionManager.getTransaction(transactionDefinition);
         try {
             bookRepository.save(bookDO);
             userRepository.save(userDO);
@@ -66,21 +67,21 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public void doInCodeTransaction(TeacherDO teacherDO) {
-        transactionTemplateGoogle.execute(transactionStatus -> {
-            try {
-                teacherRepository.save(teacherDO);
-                return null;
-            } catch (Exception e) {
-                transactionStatus.setRollbackOnly();
-                throw e;
-            }
-        });
+        transactionTemplateGoogle.execute(
+                transactionStatus -> {
+                    try {
+                        teacherRepository.save(teacherDO);
+                        return null;
+                    } catch (Exception e) {
+                        transactionStatus.setRollbackOnly();
+                        throw e;
+                    }
+                });
     }
 
     @Override
     @GlobalTransactional
     public void doInDistributedTransaction(BookDO bookDO, TeacherDO teacherDO) {
-
     }
 
     private void errorHere() {

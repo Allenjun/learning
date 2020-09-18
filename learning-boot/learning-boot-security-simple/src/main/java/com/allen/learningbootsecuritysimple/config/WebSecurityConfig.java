@@ -16,8 +16,7 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 
 /**
  * @author admin
- * @version 1.0.0
- * @Description TODO
+ * @version 1.0.0 @Description TODO
  * @createTime 2019/06/21 17:37:00
  */
 @Configuration
@@ -39,37 +38,33 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 用户认证
         http.authorizeRequests()
-            .anyRequest()
-            .authenticated()
-            .and()
-            .formLogin()
-            .loginPage("/login")
-            .permitAll()
-            .and()
-            .rememberMe()
-            .tokenValiditySeconds(3600)
-            .key(rememberKey)
-            .rememberMeServices(new TokenBasedRememberMeServices(rememberKey, userDetailsService))
-            .and()
-            .logout()
-            .permitAll();
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .rememberMe()
+                .tokenValiditySeconds(3600)
+                .key(rememberKey)
+                .rememberMeServices(new TokenBasedRememberMeServices(rememberKey, userDetailsService))
+                .and()
+                .logout()
+                .permitAll();
 
         // session时效、并发、集群
-        http.sessionManagement()
-            .maximumSessions(1)
-            .maxSessionsPreventsLogin(false);
+        http.sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(false);
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

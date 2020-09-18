@@ -1,13 +1,12 @@
 package com.allen.algorithm.stack;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 17:20
  */
 public class ArrayImplStack<E> implements Stack<E> {
-    
-    final static int DEFAULT_ARRAY_SIZE = 2;
+
+    static final int DEFAULT_ARRAY_SIZE = 2;
     private E[] elementData;
     private int index;
 
@@ -27,9 +26,8 @@ public class ArrayImplStack<E> implements Stack<E> {
         System.out.println(arrayImplStack.pop());
         System.out.println(arrayImplStack.pop());
         System.out.println(arrayImplStack.pop());
-        
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public E push(E item) {
@@ -42,7 +40,7 @@ public class ArrayImplStack<E> implements Stack<E> {
         elementData[index++] = item;
         return item;
     }
-    
+
     @Override
     public E pop() {
         if (empty()) {
@@ -52,12 +50,12 @@ public class ArrayImplStack<E> implements Stack<E> {
         elementData[index] = null;
         return oldValue;
     }
-    
+
     @Override
     public boolean empty() {
         return elementData == null || index == 0;
     }
-    
+
     @SuppressWarnings("unchecked")
     private void enlarge(int i) {
         E[] tmp = (E[]) new Object[i];

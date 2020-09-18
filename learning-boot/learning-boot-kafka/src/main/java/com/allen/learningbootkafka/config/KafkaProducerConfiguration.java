@@ -15,30 +15,28 @@ import org.springframework.kafka.support.ProducerListener;
 import org.springframework.kafka.support.converter.RecordMessageConverter;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 16:20
  */
 @Configuration
 public class KafkaProducerConfiguration {
-    
+
     @Autowired
     private KafkaProperties properties;
-    
+
     @Autowired(required = false)
     private RecordMessageConverter messageConverter;
-    
+
     @Bean
     public ProducerListener<Object, Object> kafkaProducerListener() {
         return new LoggingProducerListener<>();
     }
-    
+
     @Bean
     public ProducerFactory<Object, Object> kafkaProducerFactory() {
-        return new DefaultKafkaProducerFactory<>(
-            this.properties.buildProducerProperties());
+        return new DefaultKafkaProducerFactory<>(this.properties.buildProducerProperties());
     }
-    
+
     @Bean
     public KafkaTemplate<?, ?> kafkaTemplate() {
         KafkaTemplate<Object, Object> kafkaTemplate = new KafkaTemplate<>(kafkaProducerFactory());
@@ -49,25 +47,24 @@ public class KafkaProducerConfiguration {
         kafkaTemplate.setDefaultTopic(this.properties.getTemplate().getDefaultTopic());
         return kafkaTemplate;
     }
-    
+
     @Bean
     @Primary
     public ProducerFactory<Object, Object> kafkaProducerInTransactionFactory() {
-        DefaultKafkaProducerFactory<Object, Object> factory = new DefaultKafkaProducerFactory<>(
-            this.properties.buildProducerProperties());
-        String transactionIdPrefix = this.properties.getProducer()
-            .getTransactionIdPrefix();
+        DefaultKafkaProducerFactory<Object, Object> factory =
+                new DefaultKafkaProducerFactory<>(this.properties.buildProducerProperties());
+        String transactionIdPrefix = this.properties.getProducer().getTransactionIdPrefix();
         if (transactionIdPrefix != null) {
             factory.setTransactionIdPrefix(transactionIdPrefix);
         }
         return factory;
     }
-    
+
     @Bean
     @Primary
     public KafkaTemplate<?, ?> kafkaTemplateInTransaction() {
-        KafkaTemplate<Object, Object> kafkaTemplate = new KafkaTemplate<>(
-            kafkaProducerInTransactionFactory());
+        KafkaTemplate<Object, Object> kafkaTemplate =
+                new KafkaTemplate<>(kafkaProducerInTransactionFactory());
         if (this.messageConverter != null) {
             kafkaTemplate.setMessageConverter(this.messageConverter);
         }
@@ -75,16 +72,15 @@ public class KafkaProducerConfiguration {
         kafkaTemplate.setDefaultTopic(this.properties.getTemplate().getDefaultTopic());
         return kafkaTemplate;
     }
-    
-    /*@Bean
-    public ErrorHandler kafkaErrorHandler(KafkaTemplate<Object, Object> template) {
-        BiConsumer<ConsumerRecord<?, ?>, Exception> recoverer = new DeadLetterPublishingRecoverer(template);
-        return new SeekToCurrentErrorHandler(recoverer, 3);
-    }*/
-    
+
+  /*@Bean
+  public ErrorHandler kafkaErrorHandler(KafkaTemplate<Object, Object> template) {
+      BiConsumer<ConsumerRecord<?, ?>, Exception> recoverer = new DeadLetterPublishingRecoverer(template);
+      return new SeekToCurrentErrorHandler(recoverer, 3);
+  }*/
+
     @Bean
     public BatchErrorHandler kafkaBatchErrorHandler() {
         return new SeekToCurrentBatchErrorHandler();
     }
-    
 }

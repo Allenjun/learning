@@ -1,7 +1,6 @@
 package com.allen.learningbootes;
 
 import com.allen.learningbootes.pojo.PO.LogPO;
-import java.util.List;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,20 +11,23 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LearningBootEsApplicationTests {
-    
+
     @Autowired
     ElasticsearchTemplate elasticsearchTemplate;
-    
+
     @Test
     public void contextLoads() {
-        SearchQuery searchQuery = new NativeSearchQueryBuilder()
-            .withQuery(QueryBuilders.matchPhrasePrefixQuery("rest", "发送").slop(1).maxExpansions(2))
-            .build();
+        SearchQuery searchQuery =
+                new NativeSearchQueryBuilder()
+                        .withQuery(
+                                QueryBuilders.matchPhrasePrefixQuery("rest", "发送").slop(1).maxExpansions(2))
+                        .build();
         List<LogPO> list = elasticsearchTemplate.queryForList(searchQuery, LogPO.class);
         System.out.println(list);
     }
-    
 }

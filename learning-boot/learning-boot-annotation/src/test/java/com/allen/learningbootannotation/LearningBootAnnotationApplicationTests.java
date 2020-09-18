@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LearningBootAnnotationApplicationTests {
-    
+
     @Autowired
     ApplicationContext applicationContext;
     @Autowired
@@ -25,25 +25,24 @@ public class LearningBootAnnotationApplicationTests {
     Killer killer;
     @Autowired
     Author author;
-    
+
     @Test
     public void test1() {
         saler.sale();
     }
-    
+
     @Test
     public void test2() {
         System.out.println(importPropertyConfiguration.getName());
     }
-    
+
     @Test
     public void test3() {
         killer.kill();
     }
-    
+
     @Test
     public void test4() {
         author.introduce();
     }
-    
 }

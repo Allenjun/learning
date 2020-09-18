@@ -1,16 +1,18 @@
 package com.allen.learningbootsecurity.pojo.DO;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * sys_user
+ *
  * @author
  */
 @Data
 public class SysUser implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     /**
      * 用户ID

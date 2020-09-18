@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * @author JUN
- * @Description TODO
+ * @author JUN @Description TODO
  * @createTime 10:53
  */
 public class TreeTraversal {
-    
+
     public static void main(String[] args) {
         BinaryTreeNode node = new BinaryTreeNode(1);
         node.setLeft(new BinaryTreeNode(2));
@@ -23,7 +22,7 @@ public class TreeTraversal {
         System.out.println(TreeTraversal.midOrder(node));
         System.out.println(TreeTraversal.postOrder(node));
     }
-    
+
     public static List<Integer> preOrder(BinaryTreeNode node) {
         ArrayList<Integer> order = new ArrayList<>();
         Stack<BinaryTreeNode> stack = new Stack<>();
@@ -40,7 +39,7 @@ public class TreeTraversal {
         }
         return order;
     }
-    
+
     public static List<Integer> midOrder(BinaryTreeNode node) {
         ArrayList<Integer> order = new ArrayList<>();
         Stack<BinaryTreeNode> stack = new Stack<>();
@@ -58,7 +57,7 @@ public class TreeTraversal {
         }
         return order;
     }
-    
+
     public static List<Integer> postOrder(BinaryTreeNode node) {
         ArrayList<Integer> order = new ArrayList<>();
         Stack<BinaryTreeNode> stack = new Stack<>();
@@ -71,11 +70,10 @@ public class TreeTraversal {
             }
             if (!stack.isEmpty()) {
                 cur = stack.pop();
-                
+
                 cur = cur.getRight();
             }
         }
         return order;
     }
-    
 }

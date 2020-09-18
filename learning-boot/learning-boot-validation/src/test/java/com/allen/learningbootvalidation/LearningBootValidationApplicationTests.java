@@ -9,5 +9,4 @@ class LearningBootValidationApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

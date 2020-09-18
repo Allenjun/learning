@@ -9,5 +9,4 @@ class LearningBootActuatorApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }
