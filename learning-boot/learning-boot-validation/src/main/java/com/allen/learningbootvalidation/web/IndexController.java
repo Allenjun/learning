@@ -3,7 +3,6 @@ package com.allen.learningbootvalidation.web;
 import com.allen.learningbootvalidation.pojo.InfoReq;
 import com.allen.learningbootvalidation.pojo.MultiReq;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolationException;
 

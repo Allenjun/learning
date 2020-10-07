@@ -2,7 +2,6 @@ package com.allen.learningbootvalidation.validator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.*;
 
 @Constraint(validatedBy = PhoneNumberConstraintor.class)
 @Retention(RetentionPolicy.RUNTIME)

@@ -13,6 +13,33 @@ public class Rpc {
 
     private final static OkHttpClient client = new OkHttpClient();
 
+    public <T> T target(Class<T> clazz) {
+        Target<T> target = createTarget(clazz);
+        Map<Method, MethodHandler> dispather = createDispather(target);
+        InvocationHandler handler = createInvocationHandler(target, dispather);
+        return (T) Proxy.newProxyInstance(target.type().getClassLoader(), new Class<?>[]{target.type()}, handler);
+    }
+
+    private <T> InvocationHandler createInvocationHandler(Target<T> target, Map<Method, MethodHandler> dispather) {
+        return (proxy, method, args) -> dispather.get(method).invoke(args);
+    }
+
+    private <T> Map<Method, MethodHandler> createDispather(Target<T> target) {
+        Map<Method, MethodHandler> dispather = new HashMap<>();
+        for (Method method : target.type().getDeclaredMethods()) {
+            if (!method.isAnnotationPresent(RpcPath.class)) {
+                continue;
+            }
+            dispather.put(method, new RpcMethodHandler(target, method));
+        }
+        return dispather;
+    }
+
+    private <T> Target<T> createTarget(Class<T> clazz) {
+        RpcClient annotation = clazz.getAnnotation(RpcClient.class);
+        return new TargetImpl<T>(clazz, annotation.url());
+    }
+
     private interface Target<T> {
         String url();
 
@@ -62,33 +89,6 @@ public class Rpc {
         public Class<T> type() {
             return this.type;
         }
-    }
-
-    public <T> T target(Class<T> clazz) {
-        Target<T> target = createTarget(clazz);
-        Map<Method, MethodHandler> dispather = createDispather(target);
-        InvocationHandler handler = createInvocationHandler(target, dispather);
-        return (T) Proxy.newProxyInstance(target.type().getClassLoader(), new Class<?>[]{target.type()}, handler);
-    }
-
-    private <T> InvocationHandler createInvocationHandler(Target<T> target, Map<Method, MethodHandler> dispather) {
-        return (proxy, method, args) -> dispather.get(method).invoke(args);
-    }
-
-    private <T> Map<Method, MethodHandler> createDispather(Target<T> target) {
-        Map<Method, MethodHandler> dispather = new HashMap<>();
-        for (Method method : target.type().getDeclaredMethods()) {
-            if (!method.isAnnotationPresent(RpcPath.class)) {
-                continue;
-            }
-            dispather.put(method, new RpcMethodHandler(target, method));
-        }
-        return dispather;
-    }
-
-    private <T> Target<T> createTarget(Class<T> clazz) {
-        RpcClient annotation = clazz.getAnnotation(RpcClient.class);
-        return new TargetImpl<T>(clazz, annotation.url());
     }
 
 }

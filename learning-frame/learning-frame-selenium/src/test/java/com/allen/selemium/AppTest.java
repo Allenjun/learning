@@ -57,6 +57,8 @@ public class AppTest {
             BufferedImage screenCapture = robot.createScreenCapture(new Rectangle(0, 0, 500, 500));
             ImageIO.write(screenCapture, "jpg", new File("D:/cap.jpg"));
 
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

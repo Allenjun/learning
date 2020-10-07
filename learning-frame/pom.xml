@@ -6,9 +6,6 @@
     <artifactId>learning-frame</artifactId>
     <modelVersion>4.0.0</modelVersion>
 
-    <modules>
-
-    </modules>
     <name>learning-frame</name>
 
     <packaging>pom</packaging>

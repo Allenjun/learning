@@ -1,14 +1,16 @@
-package com.allen.server;
+package com.allen.echo.server;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
+
+import java.net.InetSocketAddress;
 
 @Slf4j
 public class ServerApplication {
@@ -22,12 +24,12 @@ public class ServerApplication {
     public static void main(String[] args) {
         try {
             new ServerApplication(10008).start();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            log.error("", e);
         }
     }
 
-    public void start() throws InterruptedException {
+    public void start() throws Exception {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workGroup = new NioEventLoopGroup();
         try {
@@ -35,7 +37,7 @@ public class ServerApplication {
             serverBootstrap
                     .group(bossGroup, workGroup)
                     .channel(NioServerSocketChannel.class)
-                    .localAddress(port)
+                    .localAddress(new InetSocketAddress(port))
                     .childHandler(
                             new ChannelInitializer<SocketChannel>() {
                                 @Override
@@ -51,22 +53,23 @@ public class ServerApplication {
         }
     }
 
-    public class HelloSocketChannel extends ChannelInboundHandlerAdapter {
+    @Slf4j
+    public static class HelloSocketChannel extends SimpleChannelInboundHandler<ByteBuf> {
+
 
         @Override
-        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-            log.info("", msg);
-            ctx.write("emm... " + msg);
+        protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
+            log.info("收到客户端消息：{}", msg.toString(CharsetUtil.UTF_8));
         }
 
         @Override
         public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-            ctx.flush();
+            ctx.writeAndFlush(Unpooled.copiedBuffer("bye".getBytes(CharsetUtil.UTF_8))).addListener(ChannelFutureListener.CLOSE);
         }
 
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-            cause.printStackTrace();
+            log.error("", cause);
             ctx.close();
         }
     }

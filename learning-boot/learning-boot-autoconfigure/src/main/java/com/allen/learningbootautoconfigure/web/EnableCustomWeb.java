@@ -2,8 +2,6 @@ package com.allen.learningbootautoconfigure.web;
 
 import org.springframework.context.annotation.Import;
 
-import java.lang.annotation.*;
-
 /**
  * @author admin
  * @version 1.0.0 @Description TODO

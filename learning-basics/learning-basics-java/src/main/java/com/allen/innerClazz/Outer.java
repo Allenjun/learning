@@ -20,6 +20,25 @@ public class Outer {
         return plus.plus(a, b);
     }
 
+    @Test
+    public void test1() {
+        Inner inner = new Outer().new Inner();
+    }
+
+    @Test
+    public void test2() {
+        StaticInner staticInner = new StaticInner();
+    }
+
+    /***
+     * 生命周期与外部类无关，相当于独立的类
+     * 外部类加载的时候。并不会加载静态内部类，只有到真正用的时候才会加载，所以可以用静态内部类实现单例模式
+     */
+    public static class StaticInner {
+        public void staticIn() {
+            System.out.println(Outer.name);
+        }
+    }
 
     /**
      * 成员内部类
@@ -34,25 +53,5 @@ public class Outer {
             System.out.println("标题是：" + Outer.this.title);
             withmethodClazz(1, 2);
         }
-    }
-
-    /***
-     * 生命周期与外部类无关，相当于独立的类
-     * 外部类加载的时候。并不会加载静态内部类，只有到真正用的时候才会加载，所以可以用静态内部类实现单例模式
-     */
-    public static class StaticInner {
-        public void staticIn() {
-            System.out.println(Outer.name);
-        }
-    }
-
-    @Test
-    public void test1() {
-        Inner inner = new Outer().new Inner();
-    }
-
-    @Test
-    public void test2() {
-        StaticInner staticInner = new StaticInner();
     }
 }
