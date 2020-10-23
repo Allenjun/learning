@@ -2,28 +2,26 @@ package com.allen.learningbootvalidation.web;
 
 import com.allen.learningbootvalidation.pojo.InfoReq;
 import com.allen.learningbootvalidation.pojo.MultiReq;
+import com.allen.learningbootvalidation.validator.PhoneNumber;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.ConstraintViolationException;
 
-@RestControllerAdvice
 @RestController
+@Validated
 public class IndexController {
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public String handler(ConstraintViolationException ex) {
-        return ex.getMessage();
-    }
-  /*
 
-      @GetMapping("/phone")
-      public String phone(@Validated @PhoneNumber String phone) {
-          return "your phone is: " + phone;
-      }
-  */
+    @GetMapping("/phone")
+    public String hello(@PhoneNumber String phone) {
+        return phone;
+    }
 
     @PostMapping("/hello")
-    public InfoReq hello(@Validated(InfoReq.Idyes.class) @RequestBody InfoReq infoReq) {
+    public InfoReq hello(@RequestBody @Validated InfoReq infoReq) {
         return infoReq;
     }
 

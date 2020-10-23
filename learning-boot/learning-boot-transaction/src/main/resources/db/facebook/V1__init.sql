@@ -2,11 +2,22 @@
 
 CREATE TABLE `book`
 (
-    `id`          INT(11) NOT NULL AUTO_INCREMENT,
-    `description` VARCHAR(255) DEFAULT NULL,
-    `title`       VARCHAR(255) DEFAULT NULL,
-    PRIMARY KEY (`id`)
+    `id`          INT
+(
+    11
+) NOT NULL AUTO_INCREMENT,
+    `description` VARCHAR
+(
+    255
+) DEFAULT NULL,
+    `title`       VARCHAR
+(
+    255
+) DEFAULT NULL,
+    PRIMARY KEY
+(`id`
 )
+    )
     ENGINE = InnoDB
     AUTO_INCREMENT = 1
     DEFAULT CHARSET = utf8;
@@ -14,10 +25,18 @@ CREATE TABLE `book`
 
 CREATE TABLE `user`
 (
-    `id`   INT(11) NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(255) DEFAULT NULL,
-    PRIMARY KEY (`id`)
+    `id`   INT
+(
+    11
+) NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR
+(
+    255
+) DEFAULT NULL,
+    PRIMARY KEY
+(`id`
 )
+    )
     ENGINE = InnoDB
     AUTO_INCREMENT = 1
     DEFAULT CHARSET = utf8;

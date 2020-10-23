@@ -9,4 +9,6 @@ public class LearningBootValidationApplication {
     public static void main(String[] args) {
         SpringApplication.run(LearningBootValidationApplication.class, args);
     }
+
+
 }

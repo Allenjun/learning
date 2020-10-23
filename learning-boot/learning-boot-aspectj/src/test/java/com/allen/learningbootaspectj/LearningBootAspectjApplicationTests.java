@@ -20,7 +20,7 @@ public class LearningBootAspectjApplicationTests {
 
     @Test
     public void test1() {
-        helloService.hello();
+        System.out.println(helloService.hello());
     }
 
     @Test

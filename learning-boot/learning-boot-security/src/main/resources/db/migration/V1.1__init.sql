@@ -1,8 +1,8 @@
 create table sys_user
 (
-    user_id     bigint(20)  not null auto_increment
+    user_id     bigint(20) not null auto_increment
         comment '用户ID',
-    dept_id     bigint(20)   default null
+    dept_id     bigint(20) default null
         comment '部门ID',
     user_name   varchar(30) not null
         comment '用户账号',
@@ -36,14 +36,14 @@ create table sys_user
     remark      varchar(500) default null
         comment '备注',
     primary key (user_id)
-)
-    engine = innodb
+) engine = innodb
     auto_increment = 100
-    comment = '用户信息表';
+comment
+= '用户信息表';
 
 create table sys_role
 (
-    role_id     bigint(20)   not null auto_increment
+    role_id     bigint(20) not null auto_increment
         comment '角色ID',
     role_name   varchar(30)  not null
         comment '角色名称',
@@ -66,10 +66,10 @@ create table sys_role
     remark      varchar(500) default null
         comment '备注',
     primary key (role_id)
-)
-    engine = innodb
+) engine = innodb
     auto_increment = 100
-    comment = '角色信息表';
+comment
+= '角色信息表';
 
 create table sys_user_role
 (
@@ -78,17 +78,17 @@ create table sys_user_role
     role_id bigint(20) not null
         comment '角色ID',
     primary key (user_id, role_id)
-)
-    engine = innodb
-    comment = '用户和角色关联表';
+) engine = innodb
+comment
+= '用户和角色关联表';
 
 create table sys_menu
 (
-    menu_id     bigint(20)  not null auto_increment
+    menu_id     bigint(20) not null auto_increment
         comment '菜单ID',
     menu_name   varchar(50) not null
         comment '菜单名称',
-    parent_id   bigint(20)   default 0
+    parent_id   bigint(20) default 0
         comment '父菜单ID',
     order_num   int(4)       default 0
         comment '显示顺序',
@@ -115,10 +115,10 @@ create table sys_menu
     remark      varchar(500) default ''
         comment '备注',
     primary key (menu_id)
-)
-    engine = innodb
+) engine = innodb
     auto_increment = 2000
-    comment = '菜单权限表';
+comment
+= '菜单权限表';
 
 create table sys_role_menu
 (
@@ -127,6 +127,6 @@ create table sys_role_menu
     menu_id bigint(20) not null
         comment '菜单ID',
     primary key (role_id, menu_id)
-)
-    engine = innodb
-    comment = '角色和菜单关联表';
+) engine = innodb
+comment
+= '角色和菜单关联表';

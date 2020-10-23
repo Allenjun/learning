@@ -12,7 +12,10 @@
         </plugins>
     </build>
     <dependencies>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
     </dependencies>
     <description>Demo project for Spring Boot</description>
     <modelVersion>4.0.0</modelVersion>
@@ -21,7 +24,6 @@
     <parent>
         <artifactId>learning-boot</artifactId>
         <groupId>com.allen</groupId>
-        <relativePath/>
         <version>1.0-SNAPSHOT</version>
     </parent>
 

@@ -2,6 +2,7 @@ package com.allen.learningbootvalidation.validator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import java.lang.annotation.*;
 
 @Constraint(validatedBy = PhoneNumberConstraintor.class)
 @Retention(RetentionPolicy.RUNTIME)
@@ -10,6 +11,10 @@ import javax.validation.Payload;
 @Inherited
 public @interface PhoneNumber {
 
+    /**
+     * description:
+     *      国际化
+     */
     String message() default "{com.allen.learningbootvalidation.validator.PhoneNumber.message}";
 
     String regep() default "^1[3-9]\\d{9}$";

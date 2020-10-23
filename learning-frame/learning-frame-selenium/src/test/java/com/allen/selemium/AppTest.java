@@ -58,7 +58,6 @@ public class AppTest {
             ImageIO.write(screenCapture, "jpg", new File("D:/cap.jpg"));
 
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
