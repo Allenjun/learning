@@ -22,6 +22,6 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
             HttpServletResponse response,
             AccessDeniedException accessDeniedException)
             throws IOException, ServletException {
-        request.getRequestDispatcher("/accessDenied").forward(request, response);
+        request.getRequestDispatcher("/access").forward(request, response);
     }
 }

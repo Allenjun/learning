@@ -30,12 +30,12 @@ public class CacheConfiguration {
     @Bean
     @Primary
     public CacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory) {
+        ;
+
         RedisCacheManager redisCacheManager = RedisCacheManager.RedisCacheManagerBuilder
                 .fromConnectionFactory(redisConnectionFactory)
                 .cacheDefaults(RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(5)))
-                .withInitialCacheConfigurations(ImmutableMap
-                        .of("log", RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(10)))
-                        .of("book", RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(30))))
+                .withInitialCacheConfigurations(ImmutableMap.of("log", RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(10)), "book", RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(30))))
                 .build();
         return redisCacheManager;
     }

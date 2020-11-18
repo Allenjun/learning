@@ -41,7 +41,7 @@ public class TemplateTests {
     }
 
     private Form data() {
-        return new Form("�»۾�", 18, new Date());
+        return new Form("我的电脑", 18, new Date());
     }
 
     private List<Log> list() {

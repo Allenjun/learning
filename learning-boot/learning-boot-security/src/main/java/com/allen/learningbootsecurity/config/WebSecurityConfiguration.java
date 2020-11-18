@@ -26,7 +26,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @Configuration
 @EnableGlobalMethodSecurity(jsr250Enabled = true, prePostEnabled = true, securedEnabled = true)
 @EnableRedisHttpSession
-public class WebSecurityConfigation extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     MyAuthenticationEntryPoint myAuthenticationEntryPoint;
@@ -44,6 +44,12 @@ public class WebSecurityConfigation extends WebSecurityConfigurerAdapter {
     JWTAuthenticationFilter jwtAuthenticationFilter;
     @Autowired
     MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
+    @Autowired
+    MyAuthenticationProvider myAuthenticationProvider;
+
+    public static void main(String[] args) {
+        System.out.println(new BCryptPasswordEncoder().encode("admin"));
+    }
 
     @Bean
     public PasswordEncoder bCryptPasswordEncoder() {
@@ -60,6 +66,9 @@ public class WebSecurityConfigation extends WebSecurityConfigurerAdapter {
 
         /* 基于数据库的认证方式 */
         configureDataSource(auth);
+
+        // 基于第三方的认证中心的方式
+//        auth.authenticationProvider(myAuthenticationProvider);
     }
 
     @Override
@@ -99,6 +108,12 @@ public class WebSecurityConfigation extends WebSecurityConfigurerAdapter {
     }
 
     private void configureCommon(HttpSecurity http) throws Exception {
+        /*http.authorizeRequests()
+                .antMatchers("/asdfg").hasRole("ADMIN")
+                .antMatchers("/fghj").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/sdasd").access("hasIpAddress('192.168.1.0/24') and hasRole('ADMIN')");
+*/
+
         /* 会话Session管理 */
         http.sessionManagement()
                 .maximumSessions(1) // 账号同时在线登录数
@@ -171,5 +186,8 @@ public class WebSecurityConfigation extends WebSecurityConfigurerAdapter {
                                 return object;
                             }
                         }); // withObjectPostProcessor方法可以修改filter的成员属性
+
+        // 第三方登录
+        http.oauth2Login();
     }
 }

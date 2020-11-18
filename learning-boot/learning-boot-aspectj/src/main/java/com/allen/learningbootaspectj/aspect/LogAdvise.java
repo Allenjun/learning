@@ -8,8 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author JUN
- * @Description
- * 正常 around -> before -> around -> after -> afterreturning
+ * @Description 正常 around -> before -> around -> after -> afterreturning
  * 异常 around -> before -> around -> after -> afterThrowing
  * @createTime 12:09
  */
@@ -24,7 +23,6 @@ public class LogAdvise {
     @Pointcut("execution(public * *.*(..))")
     public void time() {
     }
-
 
     @Before("log() || time()")
     public void before() {
@@ -54,6 +52,5 @@ public class LogAdvise {
     public void afterThrowing(JoinPoint joinPoint, Throwable error) {
         System.out.println("AfterThrowing execute...");
     }
-
 
 }

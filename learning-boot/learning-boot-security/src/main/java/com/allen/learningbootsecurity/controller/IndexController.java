@@ -1,10 +1,9 @@
 package com.allen.learningbootsecurity.controller;
 
-import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
@@ -16,14 +15,12 @@ import javax.annotation.security.RolesAllowed;
 @RestController
 public class IndexController {
 
-    @GetMapping(
-            value = "/index",
-            produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @GetMapping("/index")
     public String index() {
         return "index";
     }
 
-    @RolesAllowed({"ADMIN"})
+    @Secured({"ROLE_ADMIN"})
     @GetMapping("/admin")
     public String admin() {
         return "admin";
@@ -35,14 +32,10 @@ public class IndexController {
         return "normal";
     }
 
-    @GetMapping("/accessDenied")
-    public String accessDenied() {
-        return "accessDenied";
-    }
-
-    @GetMapping("/csrf")
-    public CsrfToken csrf(CsrfToken csrfToken) {
-        return csrfToken;
+    @PreAuthorize("hasRole('SYSTEM')")
+    @GetMapping("/sys")
+    public String sys() {
+        return "SYSTEM";
     }
 
     @GetMapping("/dynamicPerm")
@@ -50,9 +43,9 @@ public class IndexController {
         return "dynamicPerm";
     }
 
-    @RolesAllowed({"NORMAL"})
-    @PostMapping("/postRequest")
-    public String postRequest(@RequestBody String name) {
-        return name;
+    @GetMapping("/csrf")
+    public CsrfToken csrf(CsrfToken csrfToken) {
+        return csrfToken;
     }
+
 }
