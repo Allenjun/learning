@@ -6,13 +6,17 @@ import com.google.common.collect.ImmutableMap;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
+import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * @author chan
@@ -24,6 +28,7 @@ import java.time.Duration;
 public class CacheConfiguration {
 
     @Bean
+    @Primary
     public CacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory) {
         RedisCacheManager redisCacheManager = RedisCacheManager.RedisCacheManagerBuilder
                 .fromConnectionFactory(redisConnectionFactory)
@@ -47,13 +52,14 @@ public class CacheConfiguration {
         return caffeineCacheManager;
     }
 
-//    @Bean
-//    @Primary
-//    public KeyGenerator keyGenerator() {
-//        return (target, method, params) -> {
-//            String key = target.getClass().getName() + ":" + method.getName() + Arrays.stream(params).map(param -> param.getClass().getName()).collect(Collectors.joining(","));
-//            return key;
-//        };
-//    }
+    @Bean
+    public KeyGenerator keyGenerator() {
+        return (target, method, params) -> {
+            String key = target.getClass().getName()
+                    + ":" + method.getName()
+                    + ":" + Arrays.stream(params).map(param -> param.getClass().getName()).collect(Collectors.joining(","));
+            return key;
+        };
+    }
 
 }

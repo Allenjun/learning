@@ -1,9 +1,14 @@
 package com.allen.java8;
 
 import com.github.javafaker.Faker;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -14,6 +19,7 @@ public class Stream8 {
     private final static Map<String, String> books = new HashMap<>();
     private final static List<String> addrs = new ArrayList<>();
     private final static List<String> names = new ArrayList<>();
+    private final static List<Entry> entrys = new ArrayList<>();
 
     static {
         books.put(faker.book().author(), faker.book().title());
@@ -26,6 +32,26 @@ public class Stream8 {
         names.add(faker.name().fullName());
         names.add(faker.name().fullName());
         names.add(faker.name().fullName());
+        entrys.add(new Entry("allen", "1234"));
+        entrys.add(new Entry("allen", "1234"));
+        entrys.add(new Entry("allen", "2313"));
+    }
+
+    /**
+     * 去重
+     *  1: 使用 Collectors.collectingAndThen
+     *  2: 使用 filter,传入方法参数
+     *  3. lombok的 @Data注解默认重写 equals() 和 hashcode()，直接用
+     */
+    @Test
+    public void test0() {
+        entrys.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(Entry::getCode))), ArrayList::new));
+        entrys.stream().filter(distinctByKey(Entry::getCode)).collect(Collectors.toList());
+    }
+
+    private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+        Set<Object> seen = ConcurrentHashMap.newKeySet();
+        return t -> seen.add(keyExtractor.apply(t));
     }
 
     /**
@@ -99,6 +125,13 @@ public class Stream8 {
     @Test
     public void test9() {
         addrs.parallelStream().count();
+    }
+
+    @Data
+    @AllArgsConstructor
+    public static class Entry {
+        private String name;
+        private String code;
     }
 
 }

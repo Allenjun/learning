@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
  * description: TODO
  */
 @Service
-@CacheConfig(cacheNames = "log")
+@CacheConfig(cacheNames = "log", keyGenerator = "keyGenerator")
 public class LogServiceWithRedisCacheImpl implements LogServiceWithRedisCache {
     @Override
     @Cacheable
     public String get(String username) {
-        System.out.println("11");
-        return "allen";
+        System.out.println("获取数据库数据");
+        return username;
     }
 
     @Override

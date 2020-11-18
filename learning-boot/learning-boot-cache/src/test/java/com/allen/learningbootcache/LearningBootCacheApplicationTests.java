@@ -1,6 +1,5 @@
-package com.allen.cache;
+package com.allen.learningbootcache;
 
-import com.allen.learningbootcache.LearningBootCacheApplication;
 import com.allen.learningbootcache.service.LogServiceWithCaffeineCache;
 import com.allen.learningbootcache.service.LogServiceWithRedisCache;
 import org.junit.Test;
@@ -15,8 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
  * description: TODO
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {LearningBootCacheApplication.class})
-public class CacheTests {
+@SpringBootTest
+public class LearningBootCacheApplicationTests {
 
     @Autowired
     LogServiceWithRedisCache logServiceWithRedisCache;

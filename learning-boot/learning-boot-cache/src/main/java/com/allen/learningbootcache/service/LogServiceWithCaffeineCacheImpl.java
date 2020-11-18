@@ -1,6 +1,7 @@
 package com.allen.learningbootcache.service;
 
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +16,13 @@ public class LogServiceWithCaffeineCacheImpl implements LogServiceWithCaffeineCa
     @Override
     @Cacheable
     public String get(String username) {
-        System.out.println("get");
-        return "allen";
+        System.out.println("获取数据库数据");
+        return username;
     }
 
     @Override
+    @CacheEvict
     public String del(String username) {
-        System.out.println("del");
         return "success";
     }
 }
