@@ -31,6 +31,9 @@
         select * from t_user
         <where>
             <choose>
+                <when test="id != null">
+                    id = #{id}
+                </when>
                 <otherwise>
                     <if test="name != null">
                         <bind name="name" value="name+'%'"/>
@@ -40,9 +43,6 @@
                         and password = #{password}
                     </if>
                 </otherwise>
-                <when test="id != null">
-                    id = #{id}
-                </when>
             </choose>
         </where>
     </select>
